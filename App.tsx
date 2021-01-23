@@ -7,16 +7,17 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-import {LargeButton, Input} from './src/components';
+
+import {Welcome} from './src/screens';
 
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        <Text>hekko</Text>
-        <Input placeholder="Placeholder" />
-      </SafeAreaView>
+      {/* <StatusBar barStyle="dark-content" /> */}
+      <StatusBar hidden />
+      <View style={styles.container}>
+        <Welcome />
+      </View>
     </>
   );
 };
@@ -24,8 +25,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 
