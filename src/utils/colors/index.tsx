@@ -5,3 +5,4 @@ export const WHITE = 'rgb(255,255,255)';
 export const LIGHT_GREEN = 'rgb(60,112,57)';
 export const SEMI_TRANSPARENT = 'rgba(0,0,0,0.5)';
 export const SILVER = 'rgb(192,192,192)';
+export const PRIMARY = '#004e92';

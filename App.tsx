@@ -8,15 +8,15 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {Welcome} from './src/screens';
+import {Welcome, Signin, Signup} from './src/screens';
 
 const App = () => {
   return (
     <>
-      {/* <StatusBar barStyle="dark-content" /> */}
-      <StatusBar hidden />
+      <StatusBar barStyle="dark-content" />
+      {/* <StatusBar hidden /> */}
       <View style={styles.container}>
-        <Welcome />
+        <Signup />
       </View>
     </>
   );
