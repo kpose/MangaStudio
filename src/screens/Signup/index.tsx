@@ -4,8 +4,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
 import {LargeButton, Input} from '../../components';
+import {Props} from '../../Navigation/types';
 
-const Welcome = () => {
+const Welcome = ({navigation}: Props) => {
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -51,9 +52,12 @@ const Welcome = () => {
           </View>
           <View style={styles.signup}>
             <Text style={{color: COLORS.WHITE}}> I am already a member, </Text>
-            <Text style={{color: COLORS.WARNING, fontWeight: 'bold'}}>
-              Sign In{' '}
-            </Text>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate('Signin')}>
+              <Text style={{color: COLORS.WARNING, fontWeight: 'bold'}}>
+                Sign In{' '}
+              </Text>
+            </TouchableWithoutFeedback>
           </View>
         </LinearGradient>
       </View>
