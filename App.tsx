@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {
   SafeAreaView,
@@ -8,7 +9,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {Welcome, Signin, Signup} from './src/screens';
+import {Authstack} from './src/Navigation';
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
       <StatusBar barStyle="dark-content" />
       {/* <StatusBar hidden /> */}
       <View style={styles.container}>
-        <Signup />
+        <Authstack />
       </View>
     </>
   );

@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 import styles from './styles';
 import {LargeButton} from '../../components';
 
-const Welcome = () => {
+const Welcome = ({navigation}) => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -30,7 +30,7 @@ const Welcome = () => {
 
         <LargeButton
           title="Start Reading"
-          onPress={() => console.warn('started')}
+          onPress={() => navigation.navigate('Signup')}
         />
       </LinearGradient>
     </View>
