@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,12 +10,14 @@ import {
 } from 'react-native';
 
 import {Authstack} from './src/Navigation';
+import {Home} from './src/screens';
 
 const App = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState(null);
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      {/* <StatusBar hidden /> */}
       <View style={styles.container}>
         <Authstack />
       </View>

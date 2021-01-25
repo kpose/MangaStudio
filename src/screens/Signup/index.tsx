@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
@@ -19,37 +26,40 @@ const Welcome = ({navigation}: Props) => {
           locations={[0, 0.4]}
           colors={['#004e92', '#000428']}
           style={styles.gradient}>
-          <View style={{marginLeft: 30}}>
-            <Text style={styles.heading}>Create Account,</Text>
-            <Text style={styles.heading2}>Sign up to get started!</Text>
-          </View>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <View style={{marginLeft: 30}}>
+              <Text style={styles.heading}>Create Account,</Text>
+              <Text style={styles.heading2}>Sign up to get started!</Text>
+            </View>
 
-          <View style={styles.inputStyles}>
-            <Input
-              placeholder=" Username"
-              style={styles.input}
-              defaultValue={username}
-            />
+            <View style={styles.inputStyles}>
+              <Input
+                placeholder=" Username"
+                style={styles.input}
+                defaultValue={username}
+              />
 
-            <Input
-              placeholder=" Email"
-              style={styles.input}
-              defaultValue={email}
-            />
-            <Input
-              placeholder="Password"
-              secureTextEntry={true}
-              style={styles.input}
-              defaultValue={password}
-            />
-          </View>
+              <Input
+                placeholder=" Email"
+                style={styles.input}
+                defaultValue={email}
+              />
+              <Input
+                placeholder="Password"
+                secureTextEntry={true}
+                style={styles.input}
+                defaultValue={password}
+              />
+            </View>
 
-          <View style={styles.button}>
-            <LargeButton
-              title="SignUp"
-              onPress={() => console.warn('started')}
-            />
-          </View>
+            <View style={styles.button}>
+              <LargeButton
+                title="SignUp"
+                onPress={() => console.warn('started')}
+              />
+            </View>
+          </KeyboardAvoidingView>
           <View style={styles.signup}>
             <Text style={{color: COLORS.WHITE}}> I am already a member, </Text>
             <TouchableWithoutFeedback
