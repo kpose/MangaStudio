@@ -6,16 +6,46 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
 import {LargeButton, Input} from '../../components';
 import {Props} from '../../Navigation/types';
+import {firebase} from '../../firebase/config';
 
 const Welcome = ({navigation}: Props) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const onLoginPress = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response: any) => {
+        const uid = response.user.uid;
+        const usersRef = firebase.firestore().collection('users');
+        usersRef
+          .doc(uid)
+          .get()
+          .then((firestoreDocument) => {
+            if (!firestoreDocument.exists) {
+              Alert.alert('User does not exist anymore.');
+              return;
+            }
+            const user = firestoreDocument.data();
+            navigation.navigate('Home', {user});
+          })
+          .catch((error: string) => {
+            Alert.alert(error);
+          });
+      })
+      .catch((error: string) => {
+        Alert.alert(error);
+      });
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -36,13 +66,15 @@ const Welcome = ({navigation}: Props) => {
               <Input
                 placeholder=" Email"
                 style={styles.input}
-                defaultValue={email}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
               />
               <Input
                 placeholder="Password"
                 secureTextEntry={true}
                 style={styles.input}
-                defaultValue={password}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
               />
               <TouchableWithoutFeedback onPress={() => console.warn('forgot')}>
                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
@@ -50,10 +82,7 @@ const Welcome = ({navigation}: Props) => {
             </View>
 
             <View style={styles.button}>
-              <LargeButton
-                title="Login"
-                onPress={() => console.warn('started')}
-              />
+              <LargeButton title="Login" onPress={() => onLoginPress()} />
             </View>
           </KeyboardAvoidingView>
           <View style={styles.signup}>

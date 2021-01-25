@@ -5,9 +5,9 @@ import {COLORS} from '../../utils';
 
 type InputProps = {
   text?: String;
-  onChange?: () => void;
+  onChangeText: (text: string) => void;
   placeholder: String;
-  defaultValue: any;
+  value: any;
   style: ViewStyle;
   secureTextEntry?: boolean;
 };
@@ -17,12 +17,13 @@ const Input = (props: InputProps) => {
     <View>
       <TextInput
         style={[styles.input, props.style]}
-        onChangeText={props.onChange}
+        onChangeText={props.onChangeText}
         placeholder={props.placeholder}
-        defaultValue={props.defaultValue}
+        value={props.value}
         placeholderTextColor={COLORS.SILVER}
         returnKeyType="next"
         secureTextEntry={props.secureTextEntry}
+        autoCapitalize="none"
       />
     </View>
   );

@@ -6,17 +6,52 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
 import {LargeButton, Input} from '../../components';
 import {Props} from '../../Navigation/types';
+import {firebase} from '../../firebase/config';
 
 const Welcome = ({navigation}: Props) => {
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+
+  const onRegisterPress = () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Passwords don't match.");
+      return;
+    }
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response: any) => {
+        const uid = response.user.uid;
+        const data = {
+          id: uid,
+          email,
+          username,
+        };
+        const usersRef = firebase.firestore().collection('users');
+        usersRef
+          .doc(uid)
+          .set(data)
+          .then(() => {
+            navigation.navigate('Home', {user: data});
+          })
+          .catch((error: string) => {
+            Alert.alert(error);
+          });
+      })
+      .catch((error: string) => {
+        Alert.alert(error);
+      });
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -37,27 +72,36 @@ const Welcome = ({navigation}: Props) => {
               <Input
                 placeholder=" Username"
                 style={styles.input}
-                defaultValue={username}
+                value={username}
+                onChangeText={(text) => setUsername(text)}
               />
 
               <Input
                 placeholder=" Email"
                 style={styles.input}
-                defaultValue={email}
+                value={email}
+                onChangeText={(text) => setEmail(text)}
               />
+
               <Input
                 placeholder="Password"
                 secureTextEntry={true}
                 style={styles.input}
-                defaultValue={password}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+
+              <Input
+                placeholder="Confirm Password"
+                secureTextEntry={true}
+                style={styles.input}
+                value={confirmPassword}
+                onChangeText={(text) => setConfirmPassword(text)}
               />
             </View>
 
             <View style={styles.button}>
-              <LargeButton
-                title="SignUp"
-                onPress={() => console.warn('started')}
-              />
+              <LargeButton title="SignUp" onPress={() => onRegisterPress()} />
             </View>
           </KeyboardAvoidingView>
           <View style={styles.signup}>

@@ -18,9 +18,7 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>
-        <Authstack />
-      </View>
+      <View style={styles.container}>{user ? <Home /> : <Authstack />}</View>
     </>
   );
 };

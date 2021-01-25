@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   signup: {
     flexDirection: 'row',
-    top: 140,
+    top: 90,
     //bottom: 30,
     alignItems: 'center',
     justifyContent: 'center',
