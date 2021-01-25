@@ -18,10 +18,26 @@ const Authstack = () => {
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen name="Welcome" component={Welcome} />
-          <Stack.Screen name="Signin" component={Signin} />
-          <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Home" component={BottomTab} />
+          <Stack.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{gestureEnabled: false}}
+          />
+          <Stack.Screen
+            name="Signin"
+            component={Signin}
+            options={{gestureEnabled: false}}
+          />
+          <Stack.Screen
+            name="Signup"
+            component={Signup}
+            options={{gestureEnabled: false}}
+          />
+          <Stack.Screen
+            name="Home"
+            component={BottomTab}
+            options={{gestureEnabled: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
