@@ -5,6 +5,7 @@ import {Home, Signup, Signin, Welcome} from '../screens';
 import {StatusBar} from 'react-native';
 
 import {AuthStackParamList} from './types';
+import BottomTab from './BottomTab';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
@@ -20,7 +21,7 @@ const Authstack = () => {
           <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Signin" component={Signin} />
           <Stack.Screen name="Signup" component={Signup} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={BottomTab} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

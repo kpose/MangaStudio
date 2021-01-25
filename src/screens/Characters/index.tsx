@@ -3,7 +3,6 @@ import {View, Text, Button} from 'react-native';
 import styles from './styles';
 import {firebase} from '../../firebase/config';
 import {Props} from '../../Navigation/types';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = ({navigation}: Props) => {
   /* const handleSignout = () => {
@@ -13,13 +12,7 @@ const Home = ({navigation}: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text> hOMe Screen</Text>
-      <MaterialCommunityIcons
-        name="home"
-        //color={focused ? 'red' : 'blue'}
-        color={'#000'}
-        size={24}
-      />
+      <Text> Characters Screen</Text>
       {/* <Button title="Logout" onPress={() => handleSignout()} /> */}
     </View>
   );

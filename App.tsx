@@ -11,7 +11,7 @@ import {
 
 import {firebase} from './src/firebase/config';
 
-import {Authstack} from './src/Navigation';
+import {Authstack, BottomTab} from './src/Navigation';
 import {Home} from './src/screens';
 import {Spinner} from './src/components';
 
@@ -47,7 +47,9 @@ const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <View style={styles.container}>{user ? <Home /> : <Authstack />}</View>
+      <View style={styles.container}>
+        {user ? <BottomTab /> : <Authstack />}
+      </View>
     </>
   );
 };
