@@ -11,22 +11,25 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
-import {LargeButton, Input} from '../../components';
+import {LargeButton, Input, Spinner} from '../../components';
 import {Props} from '../../Navigation/types';
 import {firebase} from '../../firebase/config';
 
 const Welcome = ({navigation}: Props) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const onRegisterPress = () => {
+  const onRegisterPress = async () => {
+    setLoading(true);
     if (password !== confirmPassword) {
       Alert.alert("Passwords don't match.");
+      setLoading(false);
       return;
     }
-    firebase
+    await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response: any) => {
@@ -35,20 +38,34 @@ const Welcome = ({navigation}: Props) => {
           id: uid,
           email,
           username,
+          avatarUri:
+            'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
         };
         const usersRef = firebase.firestore().collection('users');
         usersRef
           .doc(uid)
           .set(data)
           .then(() => {
+            setLoading(false);
             navigation.navigate('Home', {user: data});
           })
-          .catch((error: string) => {
+          .catch((error: any) => {
             Alert.alert(error);
           });
       })
-      .catch((error: string) => {
-        Alert.alert(error);
+      .catch((error: any) => {
+        var errorCode = error.code;
+        if (errorCode === 'auth/invalid-email') {
+          Alert.alert('Invalid Email, Try Again!');
+        } else if (errorCode === 'auth/email-already-in-use') {
+          Alert.alert('Email already in use by another user!');
+        } else if (errorCode === 'auth/weak-password') {
+          Alert.alert(
+            'Choose a strong password combination of numbers and letters!',
+          );
+        }
+        console.log(errorCode);
+        setLoading(false);
       });
   };
 
@@ -113,6 +130,7 @@ const Welcome = ({navigation}: Props) => {
               </Text>
             </TouchableWithoutFeedback>
           </View>
+          {loading && <Spinner />}
         </LinearGradient>
       </View>
     </>

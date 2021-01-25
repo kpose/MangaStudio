@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,12 +9,41 @@ import {
   StatusBar,
 } from 'react-native';
 
+import {firebase} from './src/firebase/config';
+
 import {Authstack} from './src/Navigation';
 import {Home} from './src/screens';
+import {Spinner} from './src/components';
 
 const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const userData = document.data();
+            setLoading(false);
+            setUser(userData);
+          })
+          .catch((error) => {
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
+      }
+    });
+  }, []);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
