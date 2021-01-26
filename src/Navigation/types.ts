@@ -3,20 +3,20 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 
 export type AuthStackParamList = {
-  Home: {user: {}}
+  HomeTabs: {user: {}}
   Signup: undefined;
   Signin: undefined;
   Welcome: undefined
 };
 
-//type HomeScreenRouteProp = RouteProp<AuthStackParamList, 'Home'>;
+type HomeScreenRouteProp = RouteProp<AuthStackParamList, 'HomeTabs'>;
 
 type HomeScreenNavigationProp = StackNavigationProp<
   AuthStackParamList,
-  'Home'
+  'HomeTabs'
 >;
 
 export type Props = {
-  //route: HomeScreenRouteProp;
+  route: HomeScreenRouteProp;
   navigation: HomeScreenNavigationProp;
 };

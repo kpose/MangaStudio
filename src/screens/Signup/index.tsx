@@ -47,7 +47,7 @@ const Welcome = ({navigation}: Props) => {
           .set(data)
           .then(() => {
             setLoading(false);
-            navigation.navigate('Home', {user: data});
+            navigation.navigate('HomeTabs', {user: data});
           })
           .catch((error: any) => {
             Alert.alert(error);

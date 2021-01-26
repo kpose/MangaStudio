@@ -5,15 +5,15 @@ import {firebase} from '../../firebase/config';
 import {Props} from '../../Navigation/types';
 
 const Home = ({navigation}: Props) => {
-  /* const handleSignout = () => {
+  const handleSignout = () => {
     firebase.auth().signOut();
-    navigation.navigate('Signin');
-  }; */
+    //navigation.navigate('Signin');
+  };
 
   return (
     <View style={styles.container}>
       <Text> Seris Screen</Text>
-      {/* <Button title="Logout" onPress={() => handleSignout()} /> */}
+      <Button title="Logout" onPress={() => handleSignout()} />
     </View>
   );
 };

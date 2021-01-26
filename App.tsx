@@ -12,7 +12,7 @@ import {
 import {firebase} from './src/firebase/config';
 
 import {Authstack, BottomTab} from './src/Navigation';
-import {Home} from './src/screens';
+import {Home, Series} from './src/screens';
 import {Spinner} from './src/components';
 
 const App = () => {

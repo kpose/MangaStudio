@@ -34,7 +34,7 @@ const Authstack = () => {
             options={{gestureEnabled: false}}
           />
           <Stack.Screen
-            name="Home"
+            name="HomeTabs"
             component={BottomTab}
             options={{gestureEnabled: false}}
           />

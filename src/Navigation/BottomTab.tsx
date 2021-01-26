@@ -5,7 +5,9 @@ import {
   createBottomTabNavigator,
   BottomTabBar,
 } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Svg, {Path} from 'react-native-svg';
 import {isIphoneX} from 'react-native-iphone-x-helper';
 
@@ -102,8 +104,8 @@ const BottomTab = () => {
           component={Home}
           options={{
             tabBarIcon: ({focused}) => (
-              <MaterialCommunityIcons
-                name="home"
+              <FontAwesome5
+                name="book-open"
                 color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
                 size={30}
               />
@@ -114,11 +116,11 @@ const BottomTab = () => {
 
         <Tab.Screen
           name="Series"
-          component={Home}
+          component={Series}
           options={{
             tabBarIcon: ({focused}) => (
-              <MaterialCommunityIcons
-                name="home"
+              <Ionicons
+                name="layers"
                 color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
                 size={30}
               />
@@ -129,11 +131,11 @@ const BottomTab = () => {
 
         <Tab.Screen
           name="Characters"
-          component={Home}
+          component={Characters}
           options={{
             tabBarIcon: ({focused}) => (
-              <MaterialCommunityIcons
-                name="home"
+              <FontAwesome
+                name="smile-o"
                 color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
                 size={30}
               />
