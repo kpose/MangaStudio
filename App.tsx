@@ -14,6 +14,7 @@ import {firebase} from './src/firebase/config';
 import {Authstack, BottomTab} from './src/Navigation';
 import {Home, Series} from './src/screens';
 import {Spinner} from './src/components';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,12 +46,13 @@ const App = () => {
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
-        {user ? <BottomTab /> : <Authstack />}
+        {/* {user ? <BottomTab /> : <Authstack />} */}
+        <Authstack />
       </View>
-    </>
+    </NavigationContainer>
   );
 };
 

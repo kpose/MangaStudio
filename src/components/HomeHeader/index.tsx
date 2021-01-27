@@ -6,7 +6,8 @@ import {Input} from '../../components';
 const nearby = require('../../assets/1.jpg');
 const basket = require('../../assets/2.jpg');
 
-const HomeHeader = () => {
+const HomeHeader = (props: any) => {
+  const {avatarUri, username} = props.user;
   return (
     <View style={{flexDirection: 'row', height: 50}}>
       {/*   <TouchableOpacity
@@ -49,7 +50,7 @@ const HomeHeader = () => {
           justifyContent: 'center',
         }}>
         <Image
-          source={basket}
+          source={{uri: avatarUri}}
           resizeMode="contain"
           style={{
             width: 40,

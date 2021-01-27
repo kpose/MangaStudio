@@ -38,7 +38,10 @@ const Welcome = ({navigation}: Props) => {
             }
             const user = firestoreDocument.data();
             setLoading(false);
-            navigation.navigate('HomeTabs', {user});
+            navigation.navigate('HomeTabs', {
+              screen: 'Home',
+              params: {user: user},
+            });
           })
           .catch((error: any) => {
             console.log(error);

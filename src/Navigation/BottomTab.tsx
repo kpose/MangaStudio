@@ -88,63 +88,76 @@ const CustomTabBar = (props) => {
 
 const BottomTab = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        tabBarOptions={{
-          showLabel: false,
-          style: {
-            backgroundColor: 'transparent',
-            borderTopWidth: 0,
-            elevation: 0,
-          },
+    <Tab.Navigator
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 0,
+        },
+      }}
+      tabBar={(props) => <CustomTabBar props={props} />}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FontAwesome5
+              name="book-open"
+              color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
+              size={30}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
         }}
-        tabBar={(props) => <CustomTabBar props={props} />}>
-        <Tab.Screen
-          name="Comics"
-          component={Home}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <FontAwesome5
-                name="book-open"
-                color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
-                size={30}
-              />
-            ),
-            tabBarButton: (props) => <TabBarCustomButton {...props} />,
-          }}
-        />
+      />
 
-        <Tab.Screen
-          name="Series"
-          component={Series}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <Ionicons
-                name="layers"
-                color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
-                size={30}
-              />
-            ),
-            tabBarButton: (props) => <TabBarCustomButton {...props} />,
-          }}
-        />
+      <Tab.Screen
+        name="Series"
+        component={Series}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <Ionicons
+              name="layers"
+              color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
+              size={30}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
+      />
 
-        <Tab.Screen
-          name="Characters"
-          component={Characters}
-          options={{
-            tabBarIcon: ({focused}) => (
-              <FontAwesome
-                name="smile-o"
-                color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
-                size={30}
-              />
-            ),
-            tabBarButton: (props) => <TabBarCustomButton {...props} />,
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+      <Tab.Screen
+        name="Characters"
+        component={Characters}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FontAwesome
+              name="smile-o"
+              color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
+              size={30}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
+      />
+
+      <Tab.Screen
+        name="Comics"
+        component={Comics}
+        options={{
+          tabBarIcon: ({focused}) => (
+            <FontAwesome
+              name="smile-o"
+              color={focused ? COLORS.PRIMARY : COLORS.DARK_GRAY}
+              size={30}
+            />
+          ),
+          tabBarButton: (props) => <TabBarCustomButton {...props} />,
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

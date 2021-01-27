@@ -7,28 +7,19 @@ import {Props} from '../../Navigation/types';
 import {HomeHeader} from '../../components';
 
 const Home = ({route, navigation}: Props) => {
-  //console.log(route.params);
+  const {user} = route.params;
 
-  /* const handleSignout = () => {
+  const handleSignout = () => {
     firebase.auth().signOut();
     navigation.navigate('Signin');
-  }; */
+  };
   return (
     <SafeAreaView style={styles.container}>
       {/* destructure props and pass image from user to header */}
-      <HomeHeader />
-      {/* <Button title="Logout" onPress={() => handleSignout()} /> */}
+      <HomeHeader user={user} />
+      <Button title="Logout" onPress={() => handleSignout()} />
     </SafeAreaView>
   );
 };
 
 export default Home;
-
-/* const handleSignout = () => {
-    firebase.auth().signOut();
-    navigation.navigate('Signin');
-  }; */
-
-{
-  /* <Button title="Logout" onPress={() => handleSignout()} /> */
-}

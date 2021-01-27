@@ -3,10 +3,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 
 export type AuthStackParamList = {
-  HomeTabs: {user: {}}
+ HomeTabs: {params: {}, screen: string}
   Signup: undefined;
   Signin: undefined;
-  Welcome: undefined
+  Welcome: undefined;
+  Home: undefined
 };
 
 type HomeScreenRouteProp = RouteProp<AuthStackParamList, 'HomeTabs'>;
