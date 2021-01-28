@@ -21,8 +21,16 @@ export const AuthProvider = ({children}) => {
             await auth().signInWithEmailAndPassword(email, password);
           } catch (error) {
             setLoading(false);
-            console.log(error);
-            setError('login error');
+            var errorCode = error.code;
+            if (errorCode === 'auth/user-not-found') {
+              setError('User Not Found!');
+            } else if (errorCode === 'auth/wrong-password') {
+              setError('Wrong Email/Password Combination');
+            } else if (errorCode === 'auth/invalid-email')
+              setError('Invalid Email Address');
+            console.log(error.code);
+            setLoading(false);
+            //setError('login error');
           }
         },
         register: async (email, password) => {
