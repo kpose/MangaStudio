@@ -18,9 +18,8 @@ import {Props} from '../../Navigation/types';
 import {firebase} from '../../firebase/config';
 
 const Welcome = ({navigation}: Props) => {
-  const {login} = useContext(AuthContext);
+  const {login, loading, error} = useContext(AuthContext);
 
-  //const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -54,6 +53,7 @@ const Welcome = ({navigation}: Props) => {
                 value={password}
                 onChangeText={(text) => setPassword(text)}
               />
+              <Text style={{color: 'red'}}>{error}</Text>
               <TouchableWithoutFeedback onPress={() => console.warn('forgot')}>
                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
               </TouchableWithoutFeedback>
@@ -75,6 +75,7 @@ const Welcome = ({navigation}: Props) => {
               </Text>
             </TouchableWithoutFeedback>
           </View>
+          {loading && <Spinner />}
         </LinearGradient>
       </View>
     </>
