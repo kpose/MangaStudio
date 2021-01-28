@@ -53,7 +53,7 @@ const Welcome = ({navigation}: Props) => {
                 value={password}
                 onChangeText={(text) => setPassword(text)}
               />
-              <Text style={{color: 'red'}}>{error}</Text>
+              <Text style={styles.warning}>{error}</Text>
               <TouchableWithoutFeedback onPress={() => console.warn('forgot')}>
                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
               </TouchableWithoutFeedback>

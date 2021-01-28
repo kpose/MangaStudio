@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     alignSelf: 'flex-end',
     marginRight: 50,
-    color: COLORS.WARNING,
+    color: COLORS.SILVER,
   },
   input: {
     borderColor: COLORS.PRIMARY,
@@ -42,10 +42,15 @@ const styles = StyleSheet.create({
   },
   signup: {
     flexDirection: 'row',
-    top: 170,
-    //bottom: 30,
+    top: 140,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  warning: {
+    marginTop: 15,
+    marginBottom: 5,
+    color: COLORS.WARNING,
+    fontWeight: 'bold',
   },
 });
 

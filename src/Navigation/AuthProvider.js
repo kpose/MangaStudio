@@ -35,9 +35,20 @@ export const AuthProvider = ({children}) => {
         },
         register: async (email, password) => {
           try {
+            setLoading(true);
             await auth().createUserWithEmailAndPassword(email, password);
-          } catch (e) {
-            console.log(e);
+          } catch (error) {
+            setLoading(false);
+            var errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode === 'auth/weak-password') {
+              setError('Please, select a stronger password');
+            } else if (errorCode === 'auth/email-already-in-use') {
+              setError('Email already in use');
+            } else if (errorCode === 'auth/invalid-email')
+              setError('Invalid Email Address');
+            //console.log(error.code);
+            setLoading(false);
           }
         },
         logout: async () => {

@@ -7,12 +7,13 @@ import {Props} from '../../Navigation/types';
 import {HomeHeader} from '../../components';
 
 const Home = ({route, navigation}: Props) => {
-  const {user, logout} = useContext(AuthContext);
+  const {user, logout, userdata} = useContext(AuthContext);
   return (
     <SafeAreaView style={styles.container}>
       {/* destructure props and pass image from user to header */}
       <HomeHeader />
       <Text>Welcome user {user.uid}</Text>
+      {console.log(userdata)}
       <Button title="Logout" onPress={() => logout()} />
     </SafeAreaView>
   );

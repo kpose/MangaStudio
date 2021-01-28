@@ -17,9 +17,8 @@ import {Props} from '../../Navigation/types';
 import {AuthContext} from '../../Navigation/AuthProvider';
 
 const Welcome = ({navigation}: Props) => {
-  const {register} = useContext(AuthContext);
+  const {register, loading, error} = useContext(AuthContext);
 
-  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -71,6 +70,7 @@ const Welcome = ({navigation}: Props) => {
                 value={confirmPassword}
                 onChangeText={(text) => setConfirmPassword(text)}
               />
+              <Text style={styles.warning}>{error}</Text>
             </View>
 
             <View style={styles.button}>

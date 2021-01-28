@@ -42,10 +42,16 @@ const styles = StyleSheet.create({
   },
   signup: {
     flexDirection: 'row',
-    top: 90,
+    top: 70,
     //bottom: 30,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  warning: {
+    marginTop: 15,
+    marginBottom: 5,
+    color: COLORS.WARNING,
+    fontWeight: 'bold',
   },
 });
 
