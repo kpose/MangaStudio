@@ -1,23 +1,19 @@
-import React from 'react';
-import {SafeAreaView, Button} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView, Button, Text} from 'react-native';
 import styles from './styles';
-import {firebase} from '../../firebase/config';
+import {AuthContext} from '../../Navigation/AuthProvider';
 import {Props} from '../../Navigation/types';
 
 import {HomeHeader} from '../../components';
 
 const Home = ({route, navigation}: Props) => {
-  const {user} = route.params;
-
-  const handleSignout = () => {
-    firebase.auth().signOut();
-    navigation.navigate('Signin');
-  };
+  const {user, logout} = useContext(AuthContext);
   return (
     <SafeAreaView style={styles.container}>
       {/* destructure props and pass image from user to header */}
-      <HomeHeader user={user} />
-      <Button title="Logout" onPress={() => handleSignout()} />
+      <HomeHeader />
+      <Text>Welcome user {user.uid}</Text>
+      <Button title="Logout" onPress={() => logout()} />
     </SafeAreaView>
   );
 };

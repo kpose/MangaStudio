@@ -86,7 +86,7 @@ const CustomTabBar = (props) => {
   }
 };
 
-const BottomTab = () => {
+const HomeBottomTab = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -161,4 +161,4 @@ const BottomTab = () => {
   );
 };
 
-export default BottomTab;
+export default HomeBottomTab;

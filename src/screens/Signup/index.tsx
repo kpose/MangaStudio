@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -13,61 +13,17 @@ import styles from './styles';
 import {COLORS} from '../../utils';
 import {LargeButton, Input, Spinner} from '../../components';
 import {Props} from '../../Navigation/types';
-import {firebase} from '../../firebase/config';
+
+import {AuthContext} from '../../Navigation/AuthProvider';
 
 const Welcome = ({navigation}: Props) => {
+  const {register} = useContext(AuthContext);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-
-  const onRegisterPress = async () => {
-    setLoading(true);
-    if (password !== confirmPassword) {
-      Alert.alert("Passwords don't match.");
-      setLoading(false);
-      return;
-    }
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((response: any) => {
-        const uid = response.user.uid;
-        const data = {
-          id: uid,
-          email,
-          username,
-          avatarUri:
-            'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
-        };
-        const usersRef = firebase.firestore().collection('users');
-        usersRef
-          .doc(uid)
-          .set(data)
-          .then(() => {
-            setLoading(false);
-            navigation.navigate('HomeTabs', {user: data});
-          })
-          .catch((error: any) => {
-            Alert.alert(error);
-          });
-      })
-      .catch((error: any) => {
-        var errorCode = error.code;
-        if (errorCode === 'auth/invalid-email') {
-          Alert.alert('Invalid Email, Try Again!');
-        } else if (errorCode === 'auth/email-already-in-use') {
-          Alert.alert('Email already in use by another user!');
-        } else if (errorCode === 'auth/weak-password') {
-          Alert.alert(
-            'Choose a strong password combination of numbers and letters!',
-          );
-        }
-        console.log(errorCode);
-        setLoading(false);
-      });
-  };
 
   return (
     <>
@@ -118,7 +74,10 @@ const Welcome = ({navigation}: Props) => {
             </View>
 
             <View style={styles.button}>
-              <LargeButton title="SignUp" onPress={() => onRegisterPress()} />
+              <LargeButton
+                title="SignUp"
+                onPress={() => register(email, password)}
+              />
             </View>
           </KeyboardAvoidingView>
           <View style={styles.signup}>

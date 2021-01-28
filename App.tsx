@@ -11,22 +11,13 @@ import {
 
 import {firebase} from './src/firebase/config';
 
-import {Authstack, BottomTab, Router} from './src/Navigation';
+import Provider from './src/Navigation';
 import {Home, Series} from './src/screens';
 import {Spinner} from './src/components';
 import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [user, setUser] = useState(null);
-
-  return (
-    <NavigationContainer>
-      <View style={styles.container}>
-        <Router />
-      </View>
-    </NavigationContainer>
-  );
+  return <Provider />;
 };
 
 const styles = StyleSheet.create({

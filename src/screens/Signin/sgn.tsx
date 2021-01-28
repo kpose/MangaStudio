@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,8 +8,6 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import {AuthContext} from '../../Navigation/AuthProvider';
-
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import {COLORS} from '../../utils';
@@ -18,11 +16,49 @@ import {Props} from '../../Navigation/types';
 import {firebase} from '../../firebase/config';
 
 const Welcome = ({navigation}: Props) => {
-  const {login} = useContext(AuthContext);
-
-  //const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  const onLoginPress = async () => {
+    setLoading(true);
+    await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then((response: any) => {
+        const uid = response.user.uid;
+        const usersRef = firebase.firestore().collection('users');
+        usersRef
+          .doc(uid)
+          .get()
+          .then((firestoreDocument: {exists: any; data: () => any}) => {
+            if (!firestoreDocument.exists) {
+              Alert.alert('User does not exist anymore.');
+              return;
+            }
+            const user = firestoreDocument.data();
+            setLoading(false);
+            navigation.navigate('HomeTabs', {
+              screen: 'Home',
+              params: {user: user},
+            });
+          })
+          .catch((error: any) => {
+            console.log(error);
+          });
+      })
+      .catch((error: any) => {
+        var errorCode = error.code;
+        if (errorCode === 'auth/user-not-found') {
+          Alert.alert('User Not Found!');
+        } else if (errorCode === 'auth/wrong-password') {
+          Alert.alert('Wrong Email/Password Combination');
+        } else if (errorCode === 'auth/invalid-email')
+          Alert.alert('Invalid Email Address');
+        console.log(error.code);
+        setLoading(false);
+      });
+  };
 
   return (
     <>
@@ -60,10 +96,7 @@ const Welcome = ({navigation}: Props) => {
             </View>
 
             <View style={styles.button}>
-              <LargeButton
-                title="Login"
-                onPress={() => login(email, password)}
-              />
+              <LargeButton title="Login" onPress={() => onLoginPress()} />
             </View>
           </KeyboardAvoidingView>
           <View style={styles.signup}>
@@ -75,6 +108,7 @@ const Welcome = ({navigation}: Props) => {
               </Text>
             </TouchableWithoutFeedback>
           </View>
+          {loading && <Spinner />}
         </LinearGradient>
       </View>
     </>

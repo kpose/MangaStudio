@@ -5,7 +5,7 @@ import {Home, Signup, Signin, Welcome, Comics} from '../screens';
 import {StatusBar} from 'react-native';
 
 import {AuthStackParamList} from './types';
-import BottomTab from './BottomTab';
+import BottomTab from './HomeBottomTab';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
@@ -32,17 +32,6 @@ const Authstack = () => {
           component={Signup}
           options={{gestureEnabled: false}}
         />
-        <Stack.Screen
-          name="HomeTabs"
-          component={BottomTab}
-          options={{gestureEnabled: false}}
-        />
-
-        {/*  <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{gestureEnabled: false}}
-        /> */}
       </Stack.Navigator>
     </>
   );
