@@ -5,8 +5,6 @@ import {firebase} from '../../firebase/config';
 import {Props} from '../../Navigation/types';
 
 const Comics = ({navigation, route}: Props) => {
-  //console.log(route.params);
-
   return (
     <View style={styles.container}>
       <Text> Comics Screen</Text>

@@ -1,23 +1,19 @@
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
 
-
-export type AuthStackParamList = {
- HomeTabs: {params: {}, screen: string}
-  Signup: undefined;
-  Signin: undefined;
-  Welcome: undefined;
-  Home: undefined
+export type HomeTabsParamList = {
+  Home: undefined;
+  Series: undefined;
+  Comics: undefined;
+  Characters: undefined;
 };
 
-type HomeScreenRouteProp = RouteProp<AuthStackParamList, 'HomeTabs'>;
-
-type HomeScreenNavigationProp = StackNavigationProp<
-  AuthStackParamList,
-  'HomeTabs'
+type HomeTabNavigationProp = BottomTabNavigationProp<
+  HomeTabsParamList,
+  'Home'
 >;
 
-export type Props = {
-  route: HomeScreenRouteProp;
-  navigation: HomeScreenNavigationProp;
+export type HomeTabProps = {
+  navigation: HomeTabNavigationProp;
 };

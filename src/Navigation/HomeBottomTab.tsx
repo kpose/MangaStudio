@@ -1,6 +1,5 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {View, Image, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import {
   createBottomTabNavigator,
   BottomTabBar,
@@ -10,12 +9,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Svg, {Path} from 'react-native-svg';
 import {isIphoneX} from 'react-native-iphone-x-helper';
+import {COLORS} from '../utils';
 
 import {Home, Series, Characters, Comics} from '../screens';
 
-import {COLORS} from '../utils';
+import {HomeTabsParamList} from './types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<HomeTabsParamList>();
 
 const TabBarCustomButton = ({accessibilityState, children, onPress}) => {
   var isSelected = accessibilityState.selected;
