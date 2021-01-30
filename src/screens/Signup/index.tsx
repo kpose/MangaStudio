@@ -76,7 +76,7 @@ const Welcome = ({navigation}: Props) => {
             <View style={styles.button}>
               <LargeButton
                 title="SignUp"
-                onPress={() => register(email, password)}
+                onPress={() => register(email, password, username)}
               />
             </View>
           </KeyboardAvoidingView>

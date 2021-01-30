@@ -23,10 +23,6 @@ export default function Routes() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (loading) {
-    return <Spinner />;
-  }
-
   return (
     <NavigationContainer>
       {user ? <HomeBottomTab /> : <AuthStack />}

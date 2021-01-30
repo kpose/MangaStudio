@@ -6,7 +6,6 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null);
-  const [userdata, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -17,7 +16,6 @@ export const AuthProvider = ({children}) => {
         setUser,
         loading,
         error,
-        userdata,
         login: async (email, password) => {
           try {
             setLoading(true);
@@ -31,12 +29,10 @@ export const AuthProvider = ({children}) => {
                   .get()
                   .then((firestoreDocument) => {
                     if (!firestoreDocument.exists) {
-                      Alert.alert('User does not exist anymore.');
+                      alert('User does not exist anymore.');
                       return;
                     }
-                    const user = firestoreDocument.data();
-                    setUserData(user);
-                    setLoading(false);
+                    //const user = firestoreDocument.data();
                   })
                   .catch((error) => {
                     console.log(error);
@@ -49,34 +45,37 @@ export const AuthProvider = ({children}) => {
               setError('User Not Found!');
             } else if (errorCode === 'auth/wrong-password') {
               setError('Wrong Email/Password Combination');
-            } else if (errorCode === 'auth/invalid-email')
+            } else if (errorCode === 'auth/invalid-email') {
               setError('Invalid Email Address');
-            console.log(error.code);
+            } else if (errorCode === 'auth/invalid-email') {
+              setError('Check your internet connection');
+            }
             setLoading(false);
-            //setError('login error');
           }
         },
-        register: async (email, password) => {
+
+        //setError('login error');
+        register: async (email, password, username) => {
           try {
             setLoading(true);
             await auth()
               .createUserWithEmailAndPassword(email, password)
               .then((response) => {
                 const uid = response.user.uid;
-
                 const data = {
                   id: uid,
                   email,
+                  username,
                   avatarUri:
                     'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
                 };
-                console.log(data);
+
                 const usersRef = firestore().collection('users');
                 usersRef
                   .doc(uid)
                   .set(data)
                   .then(() => {
-                    return;
+                    setLoading(false);
                   })
                   .catch((error) => {
                     alert(error);

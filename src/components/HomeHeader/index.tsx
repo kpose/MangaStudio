@@ -7,25 +7,10 @@ const nearby = require('../../assets/1.jpg');
 const basket = require('../../assets/2.jpg');
 
 const HomeHeader = (props: any) => {
+  const {username, email, avatarUri} = props.userData;
+  //console.log(username);
   return (
     <View style={{flexDirection: 'row', height: 50}}>
-      {/*   <TouchableOpacity
-        style={{
-          width: 50,
-          paddingLeft: 20,
-          justifyContent: 'center',
-        }}>
-        <Image
-          source={nearby}
-          resizeMode="contain"
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: 20,
-          }}
-        />
-      </TouchableOpacity> */}
-
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <View
           style={{
@@ -48,7 +33,7 @@ const HomeHeader = (props: any) => {
           paddingRight: 20,
           justifyContent: 'center',
         }}>
-        {/* <Image
+        <Image
           source={{uri: avatarUri}}
           resizeMode="contain"
           style={{
@@ -56,7 +41,7 @@ const HomeHeader = (props: any) => {
             height: 40,
             borderRadius: 20,
           }}
-        /> */}
+        />
       </TouchableOpacity>
     </View>
   );

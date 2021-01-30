@@ -2,7 +2,7 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
 
-export type HomeTabsParamList = {
+ export type HomeTabsParamList = {
   Home: undefined;
   Series: undefined;
   Comics: undefined;
