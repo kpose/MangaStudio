@@ -17,7 +17,12 @@ import {Spinner} from './src/components';
 import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
-  return <Provider />;
+  return (
+    <>
+      <StatusBar barStyle="dark-content" />
+      <Provider />
+    </>
+  );
 };
 
 const styles = StyleSheet.create({

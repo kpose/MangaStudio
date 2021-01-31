@@ -67,3 +67,6 @@ buck-out/
 
 #googleService
 /ios/GoogleService-Info.plist
+
+#api
+/src/utils/api.ts

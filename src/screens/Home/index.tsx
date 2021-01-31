@@ -3,38 +3,24 @@ import {SafeAreaView, Button, Text} from 'react-native';
 import styles from './styles';
 import {AuthContext} from '../../Navigation/AuthProvider';
 import {Props} from '../../Navigation/types';
-import firestore from '@react-native-firebase/firestore';
+import useFetch from '../../helpers/useFetch';
+import {KEYS} from '../../utils';
 
 import {HomeHeader, Spinner} from '../../components';
 
 const Home = ({navigation}: Props) => {
   const {logout, user} = useContext(AuthContext);
-  const [userDetails, setUserDetails] = useState(null);
+  const [comics, setComics] = useState({});
 
-  useEffect(() => {
-    const usersRef = firestore().collection('users');
-    usersRef
-      .doc(user.uid)
-      .get()
-      .then((firestoreDocument) => {
-        if (!firestoreDocument.exists) {
-          alert('User does not exist anymore.');
-          return;
-        }
-        const user = firestoreDocument.data();
-        setUserDetails(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const data = useFetch(
+    `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=${KEYS.PUBLICKEY}&hash=${KEYS.MD5KEY}`,
+  );
+  //setComics(data);
+  //console.log(comics);
 
-  if (userDetails === null) {
-    return <Spinner />;
-  }
   return (
     <SafeAreaView style={styles.container}>
-      <HomeHeader userData={userDetails} />
+      <HomeHeader />
       <Button title="Logout" onPress={() => logout()} />
     </SafeAreaView>
   );

@@ -1,49 +1,65 @@
-import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import {COLORS} from '../../utils';
 import {Input} from '../../components';
-
-const nearby = require('../../assets/1.jpg');
-const basket = require('../../assets/2.jpg');
+import firestore from '@react-native-firebase/firestore';
+import {AuthContext} from '../../Navigation/AuthProvider';
 
 const HomeHeader = (props: any) => {
-  const {username, email, avatarUri} = props.userData;
-  //console.log(username);
+  const {logout, user} = useContext(AuthContext);
+  const [userDetails, setUserDetails] = useState({});
+
+  useEffect(() => {
+    const usersRef = firestore().collection('users');
+    usersRef
+      .doc(user.uid)
+      .get()
+      .then((firestoreDocument) => {
+        if (!firestoreDocument.exists) {
+          alert('User does not exist anymore.');
+          return;
+        }
+        const user = firestoreDocument.data();
+        setUserDetails(user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  if (userDetails === null) {
+    return <ActivityIndicator size="small" color={COLORS.PRIMARY} />;
+  }
+
   return (
-    <View style={{flexDirection: 'row', height: 50}}>
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <View
-          style={{
-            width: '70%',
-            height: '100%',
-            backgroundColor: COLORS.DARK_GRAY,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 30,
-          }}>
-          <Text>search component goes here</Text>
-        </View>
-      </View>
-
-      <TouchableOpacity
-        /* add an onpress here to change user image */
-
-        style={{
-          width: 50,
-          paddingRight: 20,
-          justifyContent: 'center',
-        }}>
+    <SafeAreaView
+      style={{
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        marginRight: 10,
+      }}>
+      <TouchableOpacity>
         <Image
-          source={{uri: avatarUri}}
+          source={{uri: userDetails.avatarUri}}
           resizeMode="contain"
           style={{
+            //flex: 1,
             width: 40,
             height: 40,
             borderRadius: 20,
+            justifyContent: 'center',
           }}
         />
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
