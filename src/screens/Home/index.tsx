@@ -1,28 +1,40 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, Button, Text} from 'react-native';
+import {SafeAreaView, Button, Text, ScrollView, View} from 'react-native';
 import styles from './styles';
 import {AuthContext} from '../../Navigation/AuthProvider';
 import {Props} from '../../Navigation/types';
 import useFetch from '../../helpers/useFetch';
 import {KEYS} from '../../utils';
 
-import {HomeHeader, Spinner} from '../../components';
+import {HomeHeader, Spinner, ForYou} from '../../components';
 
 const Home = ({navigation}: Props) => {
   const {logout, user} = useContext(AuthContext);
-  const [comics, setComics] = useState({});
 
-  const data = useFetch(
+  /* const data = useFetch(
     `https://gateway.marvel.com:443/v1/public/comics?ts=1&apikey=${KEYS.PUBLICKEY}&hash=${KEYS.MD5KEY}`,
   );
-  //setComics(data);
-  //console.log(comics);
+
+  console.log(data); */
+
+  /* const list = () => {
+    return data.data.results.map((comic) => {
+      return (
+        <Card
+          key={comic.key}
+          title={comic.title}
+          backgroundImageUri="https://i.annihil.us/u/prod/marvel/images/OpenGraph-TW-1200x630.jpg">
+          <Text>{comic.title}</Text>
+        </Card>
+      );
+    });
+  }; */
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <HomeHeader />
-      <Button title="Logout" onPress={() => logout()} />
-    </SafeAreaView>
+      <ForYou />
+    </View>
   );
 };
 
