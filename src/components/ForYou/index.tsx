@@ -40,8 +40,10 @@ const ForYou = () => {
         <FlatList
           data={comics.data.results}
           horizontal={true}
-          renderItem={({item}) => <Card title={item.title} />}
-          keyExtractor={(item) => item.id}
+          renderItem={({item}) => (
+            <Card title={item.title} backgroundImageUri={item.thumbnail.path} />
+          )}
+          keyExtractor={(item) => item.id.toString()}
           showsHorizontalScrollIndicator={false}
         />
       </View>

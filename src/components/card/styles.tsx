@@ -8,14 +8,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageContainer: {
-    backgroundColor: 'red',
+    //backgroundColor: 'red',
     height: 250,
     width: 150,
     borderRadius: 20,
     margin: 5,
     marginRight: 10,
 
-    shadowColor: COLORS.DARK_GRAY,
+    shadowColor: COLORS.PRIMARY,
     shadowOffset: {
       width: 10,
       height: 10,
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover',
+    borderRadius: 20,
   },
   titleContainer: {
     justifyContent: 'center',
