@@ -12,7 +12,7 @@ import {KEYS} from '../../utils';
 import {useNavigation} from '@react-navigation/native';
 
 const ForYou = () => {
-  const [comics, setComics] = useState({});
+  const [comics, setComics] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
@@ -31,27 +31,29 @@ const ForYou = () => {
     fetchData();
   }, []);
 
-  if (loading) {
+  /*  if (loading) {
     return <ActivityIndicator size="small" color="#0000ff" />;
-  }
+  } */
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}> For You</Text>
       <View style={styles.cardContainer}>
-        <FlatList
-          data={comics.data.results}
-          horizontal={true}
-          renderItem={({item}) => (
-            <Card
-              title={item.title}
-              backgroundImageUri={item.thumbnail.path}
-              onPress={() => navigation.navigate('ComicDetails')}
-            />
-          )}
-          keyExtractor={(item) => item.id.toString()}
-          showsHorizontalScrollIndicator={false}
-        />
+        {comics && (
+          <FlatList
+            data={comics.data.results}
+            horizontal={true}
+            renderItem={({item}) => (
+              <Card
+                title={item.title}
+                backgroundImageUri={item.thumbnail.path}
+                onPress={() => navigation.navigate('ComicDetails')}
+              />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            showsHorizontalScrollIndicator={false}
+          />
+        )}
       </View>
     </SafeAreaView>
   );
