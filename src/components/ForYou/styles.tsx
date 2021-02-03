@@ -3,9 +3,7 @@ import {COLORS} from '../../utils';
 
 const styles = StyleSheet.create({
   container: {
-    //justifyContent: 'center',
-    //alignItems: 'center',
-    marginTop: 40,
+    //marginTop: 40,
     marginLeft: 10,
   },
   heading: {

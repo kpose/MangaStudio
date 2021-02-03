@@ -1,7 +1,18 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../utils';
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginLeft: 2,
+  },
+  heading: {
+    fontWeight: 'bold',
+    fontSize: 40,
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
 });
 
 export default styles;

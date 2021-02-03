@@ -35,7 +35,7 @@ const ForYou = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}> FOR YOU</Text>
+      <Text style={styles.heading}> For You</Text>
       <View style={styles.cardContainer}>
         <FlatList
           data={comics.data.results}
