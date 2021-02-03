@@ -9,10 +9,12 @@ import {
 import styles from './styles';
 import {Card} from '../index';
 import {KEYS} from '../../utils';
+import {useNavigation} from '@react-navigation/native';
 
 const ForYou = () => {
   const [comics, setComics] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
 
   useEffect(() => {
     setLoading(true);
@@ -41,7 +43,11 @@ const ForYou = () => {
           data={comics.data.results}
           horizontal={true}
           renderItem={({item}) => (
-            <Card title={item.title} backgroundImageUri={item.thumbnail.path} />
+            <Card
+              title={item.title}
+              backgroundImageUri={item.thumbnail.path}
+              onPress={() => navigation.navigate('ComicDetails')}
+            />
           )}
           keyExtractor={(item) => item.id.toString()}
           showsHorizontalScrollIndicator={false}

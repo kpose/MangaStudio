@@ -12,6 +12,7 @@ import {isIphoneX} from 'react-native-iphone-x-helper';
 import {COLORS} from '../utils';
 
 import {Home, Series, Characters, Comics} from '../screens';
+import HomeStack from './HomeStack';
 
 import {HomeTabsParamList} from './types';
 
@@ -100,7 +101,7 @@ const HomeBottomTab = () => {
       tabBar={(props) => <CustomTabBar props={props} />}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarIcon: ({focused}) => (
             <FontAwesome5

@@ -5,6 +5,7 @@ import styles from './styles';
 type CardProps = {
   title: string;
   backgroundImageUri: string;
+  onPress(): void;
 };
 
 const variant = 'portrait_xlarge';
@@ -16,7 +17,7 @@ const Card = (props: CardProps) => {
   return (
     <>
       <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={props.onPress}>
           <View style={styles.imageContainer}>
             <ImageBackground
               source={{uri: url}}
