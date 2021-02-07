@@ -1,12 +1,9 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Home, ComicDetails} from '../screens';
-import {StatusBar} from 'react-native';
+import {HomeStackParamList} from './types';
 
-//import {AuthStackParamList} from './types';
-
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<HomeStackParamList>();
 
 const HomeStack = () => {
   return (
@@ -24,6 +21,7 @@ const HomeStack = () => {
           name="ComicDetails"
           component={ComicDetails}
           options={{gestureEnabled: false}}
+          initialParams={{data: {}}}
         />
       </Stack.Navigator>
     </>

@@ -47,7 +47,11 @@ const ForYou = () => {
               <Card
                 title={item.title}
                 backgroundImageUri={item.thumbnail.path}
-                onPress={() => navigation.navigate('ComicDetails')}
+                onPress={() =>
+                  navigation.navigate('ComicDetails', {
+                    data: item,
+                  })
+                }
               />
             )}
             keyExtractor={(item) => item.id.toString()}

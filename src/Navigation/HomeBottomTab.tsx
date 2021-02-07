@@ -14,11 +14,21 @@ import {COLORS} from '../utils';
 import {Home, Series, Characters, Comics} from '../screens';
 import HomeStack from './HomeStack';
 
-import {HomeTabsParamList} from './types';
+import {HomeBottomTabParamList} from './types';
 
-const Tab = createBottomTabNavigator<HomeTabsParamList>();
+const Tab = createBottomTabNavigator<HomeBottomTabParamList>();
 
-const TabBarCustomButton = ({accessibilityState, children, onPress}) => {
+type TabProps = {
+  accessibilityState: any;
+  children: any;
+  onPress: any;
+};
+
+const TabBarCustomButton = ({
+  accessibilityState,
+  children,
+  onPress,
+}: TabProps) => {
   var isSelected = accessibilityState.selected;
 
   if (isSelected) {
